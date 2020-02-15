@@ -1,0 +1,1 @@
+cmd  /k  call C:\Users\amz_o\virtualenvironments\airbnb\Scripts/activate.bat
