@@ -123,7 +123,7 @@ venv.bak/
 # mkdocs documentation
 /site
 
-# mypy
+# mypys
 .mypy_cache/
 .dmypy.json
 dmypy.json
@@ -133,3 +133,7 @@ dmypy.json
 
 # pytype static type analyzer
 .pytype/
+
+*.bat
+*.json
+.vscode/
