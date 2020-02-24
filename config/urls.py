@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 ]
+
+
+# URL경로와 우리의 DIR경로가 꼭 같을 필요는 없음. 이렇게 MEDIA라고하는 folder루트에 MEDIA_ROOT를 추가해주어도됨.
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

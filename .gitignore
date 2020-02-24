@@ -137,3 +137,4 @@ dmypy.json
 *.bat
 *.json
 .vscode/
+uploads/

@@ -2,3 +2,4 @@ django==2.2.5
 flake8
 black
 Pillow
+django-countries
