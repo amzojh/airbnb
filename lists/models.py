@@ -8,8 +8,10 @@ from rooms import models as room_models
 
 class List(core_models.TimeStampedModel):
     name = models.CharField(max_length=80)
-    user = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room = models.ForeignKey(room_models.Room, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        user_models.User, related_name="list", on_delete=models.CASCADE
+    )
+    room = models.ManyToManyField(room_models.Room, blank=True)
 
     def __str__(self):
         return f"{self.name}"
