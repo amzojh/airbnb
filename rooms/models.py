@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 from django_countries.fields import CountryField
 
 
@@ -11,7 +11,7 @@ from users import models as user_models
 
 class AbstractItem(core_models.TimeStampedModel):
 
-    """ Abstraft Item """
+    """ Abstraft Item Definition"""
 
     name = models.CharField(max_length=80)
 
@@ -23,8 +23,7 @@ class AbstractItem(core_models.TimeStampedModel):
 
 
 class RoomType(AbstractItem):
-
-    """ Room Type """
+    """ Room type Definition"""
 
     class Meta:
         verbose_name = "Room Types"
@@ -92,10 +91,12 @@ class Room(core_models.TimeStampedModel):
     # reference : https://docs.djangoproject.com/en/3.0/topics/db/models/
     # self.obj 를 통해서 유효성검사를 해주면된다.
     def save(self, *args, **kargs):
-
         self.city = str.capitalize(self.city)
         super().save(*args, **kargs)
         pass
+
+    def get_absolute_url(self):
+        return reverse("rooms:detail", kwargs={"pk": self.pk})  # urls의 namespace및 name
 
     def __str__(self):
         return self.name
