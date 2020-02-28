@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
+
+
 from rooms import views as room_views
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("rooms/", include("rooms.urls", namespace="rooms")),
+    path("users/", include("users.urls", namespace="users")),
     path("", include("core.urls", namespace="core")),
 ]
 
@@ -30,4 +34,7 @@ urlpatterns = [
 # URL경로와 우리의 DIR경로가 꼭 같을 필요는 없음. 이렇게 MEDIA라고하는 folder루트에 MEDIA_ROOT를 추가해주어도됨.
 
 if settings.DEBUG:
+    import debug_toolbar
+
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [url(r"^__debug__/", include(debug_toolbar.urls))]

@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-secret_key = os.getenv(
-    "DJANGO_SECRETKEY", "3t_dm(^1!dl#wuz*t=4vw$@d^wyij!4qc_jg8dzprzxruto^d8"
-)
+secret_key = os.environ.get("DJANGO_SECRETKEY")
 print(secret_key)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -58,7 +56,7 @@ PROJECT_APPS = [
     "conversations.apps.ConversationsConfig",
 ]
 
-THIRD_PARTY_APPS = ["django_countries", "django_seed"]
+THIRD_PARTY_APPS = ["django_countries", "django_seed", "debug_toolbar"]
 
 INSTALLED_APPS = PROJECT_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
@@ -70,6 +68,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -116,6 +115,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
+INTERNAL_IPS = ("127.0.0.1",)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -141,3 +142,21 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/uploads/"
+
+
+# Email Configuration
+
+"""
+Reference : https://docs.djangoproject.com/en/3.0/topics/email/
+"""
+
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_FROM = os.environ.get("EMAIL_FROM")
+
+
+print(
+    EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_FROM,
+)

@@ -4,3 +4,6 @@ black
 Pillow
 django-countries
 django_seed
+django-dotenv
+requests
+django-debug-toolbar
