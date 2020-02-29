@@ -1,7 +1,3 @@
-# Replicating Airbnb website using django
+# Airbnb clone
 
-first step for being full-stack developer
-
-### Requirements
-Black
-flake8
+Django
