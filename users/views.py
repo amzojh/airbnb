@@ -7,7 +7,6 @@ from django.views.generic import FormView
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
-from django.
 from . import forms as user_forms
 from . import models as user_models
 

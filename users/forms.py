@@ -7,7 +7,7 @@ CSRF : Cross Site Request Foregery
 Authenticate : https://docs.djangoproject.com/en/3.0/topics/auth/
 """
 
-# 일반form은 save method가 없음.
+
 class SignUpForm(UserCreationForm):
 
     email = forms.EmailField()
