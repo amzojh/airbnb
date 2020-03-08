@@ -104,13 +104,17 @@ class Room(core_models.TimeStampedModel):
     def total_rating(self):
         # review에 many to many로 엮여있기 때문에, self.review로 접근이 가능함.
         all_reviews = self.review.all()
-        all_ratings = []
+        all_ratings = 0
 
         if len(all_reviews) > 0:
             for review in all_reviews:
                 all_ratings += review.rating_average()
-            return round(all_ratings / len(all_ratings))
+            return round(all_ratings / len(all_reviews), 2)
         return 0
+
+    def first_photo(self):
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url
 
 
 class Photo(core_models.TimeStampedModel):

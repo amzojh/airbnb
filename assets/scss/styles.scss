@@ -8,6 +8,48 @@ rem : root size의 상대경로
 
 */
 
+.nav_link {
+
+  @apply ml-6 border-b-2 border-white h-full flex items-center;
+
+  a {
+    @apply pt-10 pb-6 px-5;
+  }
+
+  &:hover {
+    @apply border-gray-600;
+  }
+}
+
+input {
+  @apply rounded-sm py-5 font-light text-lg w-full text-left border border-gray-600 px-5;
+
+  &:focus {
+    @apply border-teal-500 outline-none;
+  }
+}
+
+form {
+  .input {
+    @apply mb-3;
+
+    &.has_error {
+      input {
+        @apply bg-red-200 border border-red-300;
+
+        &:focus {
+          @apply border-red-500;
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  @apply text-center rounded-sm py-5 font-light text-lg w-full;
+}
+
+
 .search-bok {
   transition: box-shadow 0.2s linear;
 }

@@ -6,20 +6,36 @@
 
 {% block content %}
 
-    {% for room in rooms  %}
-        <a href="{% url "rooms:detail" room.pk %}"> 
-            <h4>{{room.name}} / ${{ room.price }}</h4>
-        </a>
-    {% endfor %}
-    <h5>
+    <!-- unsplash.com -->
 
-    {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
-    {% endif %}
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-    {% if page_obj.has_next %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
-    </h5>
+    <div class="container mx-auto pb-10">
+        <div class="rounded-xl -mx-40 bg-gray-800 h-50vh mt-32 mb-24 bg-cover bg-center bg-fixed" style="background-image:url(https://images.unsplash.com/photo-1570045341934-0f308857430a?ixlib=rb-1.2.1&auto=format)">
+
+        </div>
+
+        <div class="flex flex-wrap -mx-40 mb-10">
+            {% for room in rooms  %}
+                {% include 'partials/room_card.html' with room=room %} 
+                <!-- with room=room 은 argument를 정해주는 것임. -->
+            {% endfor %}
+        </div>
+        
+        <div class="flex items-center justify-center mx-auto container">
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}" class="text-teal-500">
+                    <i class="mr-1 fas fa-arrow-left fa-lg"></i>
+                </a>
+            {% endif %}
+                <span>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}                    
+                </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}" class="text-teal-500">
+                    <i class="ml-1 fas fa-arrow-right fa-lg"></i>
+                </a>
+            {% endif %}
+        </div >
+    </div>
+
 
 {% endblock %}

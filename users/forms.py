@@ -8,13 +8,29 @@ Authenticate : https://docs.djangoproject.com/en/3.0/topics/auth/
 """
 
 
-class SignUpForm(UserCreationForm):
-
-    email = forms.EmailField()
-
+class SignUpForm(forms.ModelForm):
     class Meta:
         model = user_models.User
-        fields = ("email",)
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+        )
+        widgets = {
+            "first_name": forms.TextInput(attrs={"placeholder": "Firstname"}),
+            "last_name": forms.TextInput(attrs={"placeholder": "Secondname"}),
+            "email": forms.EmailInput(attrs={"placeholder": "Email"}),
+        }
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirmed Password"})
+    )
+
+    def clean(self):
+        email = self.cleaned_data["email"]
 
     # class Meta:
     #     model = user_models.User
@@ -43,8 +59,10 @@ class SignUpForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "Email",}))
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Password",})
+    )
     pass
 
     # 기구현되어있는 method임. {clean_}명 return이 없으면 view의 cleaned_data는 없어짐
